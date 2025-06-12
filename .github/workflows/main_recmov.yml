@@ -68,4 +68,4 @@ jobs:
         with:
           app-name: 'recmov'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7E0EF9B4D5FA4695BD872097D94DFAAD }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_763C885750594F17877110CBAE460042 }}
