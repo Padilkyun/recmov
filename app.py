@@ -99,7 +99,4 @@ def home():
     return 'Flask app berjalan, kirim POST ke /predict untuk mendapatkan rekomendasi!'
 
 if __name__ == '__main__':
-    public_url = ngrok.connect(5000)
-    print(f"[*] Aplikasi Flask dapat diakses melalui {public_url}")
-    
     serve(app, host='0.0.0.0', port=5000)
