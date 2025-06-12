@@ -8,3 +8,4 @@ pyngrok==5.1.0
 waitress==2.1.2
 setuptools
 wheel
+protobuf==3.20.0
