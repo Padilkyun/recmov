@@ -8,9 +8,8 @@ from flask_cors import CORS
 import numpy as np
 
 app = Flask(__name__)
-CORS(app)  # Mengizinkan CORS
+CORS(app) 
 
-# Memuat data
 try:
     df = pd.read_csv('cleaned_movie_df.csv')
 except Exception as e:
@@ -68,7 +67,7 @@ def predict():
     recommendations = recommend_content_based_with_model(titles, df, cosine_sim, model)
     
     return jsonify(recommendations)
-
+# Get unique genres and content types
 @app.route('/genres', methods=['GET'])
 def get_genres():
     df['listed_in_list'] = df['listed_in'].str.split(', ')
