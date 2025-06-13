@@ -1,15 +1,20 @@
+import os
 import pandas as pd
 from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from pyngrok import ngrok
+from flask_cors import CORS
 import numpy as np
-from waitress import serve 
 
 app = Flask(__name__)
+CORS(app)  # Mengizinkan CORS
 
-df = pd.read_csv('cleaned_movie_df.csv')
+# Memuat data
+try:
+    df = pd.read_csv('cleaned_movie_df.csv')
+except Exception as e:
+    print(f"Error loading CSV: {e}")
 
 df['combined_features'] = df['title'] + ' ' + df['listed_in']
 
@@ -18,8 +23,13 @@ tfidf_matrix = tfidf_vectorizer.fit_transform(df['combined_features'])
 
 cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 
-model = load_model('my_recommendation_model.h5')
+# Memuat model
+try:
+    model = load_model('my_recommendation_model.h5')
+except Exception as e:
+    print(f"Error loading model: {e}")
 
+# Fungsi rekomendasi
 def recommend_content_based_with_model(titles, df, cosine_sim, model=None):
     recommendations = []
     
